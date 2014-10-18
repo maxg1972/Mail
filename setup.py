@@ -13,7 +13,7 @@ setup(
     py_modules=['Mail'],
     package_data={'': ['README.md']},
     include_package_data=True,
-    install_requires=['smtplib','getpass','email'],
+    install_requires=['email'],
     tests_require=[],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
