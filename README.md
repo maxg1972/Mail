@@ -1,5 +1,5 @@
-dbDrive - database query executer
-=================================
+Mail - database query executer
+==============================
 Utilities to facilitate mail sending. This is accomplished with an object that give you methods to send mail
 
 Requires
