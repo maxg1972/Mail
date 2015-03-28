@@ -62,7 +62,7 @@ class Mail(object):
         @param port: connection port (default: 25)
         @param user: smtp username (default: None)
         @param password: smtp password (default: None)
-        @param encryption: encryption method (values: None, 'starttls'; default: None)
+        @param encryption: encryption method (values: None, 'SSL', 'TLS'; default: None)
         @param delivery_notification: send delivery notification (values: True, False; default: False)
         @param return_receipt: send return receipt (values: True, False; default: False)
         """
@@ -217,15 +217,20 @@ class Mail(object):
                 
         # open STMP server connection
         try:
-            smtp = smtplib.SMTP(self.__smtp['server'],self.__smtp['port'])
+            if (self.__smtp['encryption']) and (self.__smtp['encryption'] == "SSL"):
+                # active encryption
+                smtp = smtplib.SMTP_SSL(self.__smtp['server'],self.__smtp['port'])
+            else:
+                # noe encryption
+                smtp = smtplib.SMTP(self.__smtp['server'],self.__smtp['port'])
         except smtplib.socket.gaierror:
             raise ConnectionError("Server connection error (%s)" % (self.__smtp['server']))
 
-        # active encryption
-        if (self.__smtp['encryption']) and (self.__smtp['encryption'] == "starttls"):
+        # active encryption TLS
+        if (self.__smtp['encryption']) and (self.__smtp['encryption'] == "TLS"):
             smtp.ehlo_or_helo_if_needed()
             smtp.starttls()
-    
+
         # execute STMP server login
         if self.__smtp['user']:
             smtp.ehlo_or_helo_if_needed()
