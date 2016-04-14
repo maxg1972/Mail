@@ -26,7 +26,7 @@
 
 __author__ = "Massimo Guidi"
 __author_email__ = "maxg1972@gmail.com"
-__version__ = '1.0'
+__version__ = '1.1'
 
 import smtplib
 import getpass
@@ -100,7 +100,7 @@ class Mail(object):
         """
         self.__notify['delivery_notification'] = delivery_notification
         self.__notify['return_receipt'] = return_receipt
-                      
+
     def set_attachments(self,files):
         """
         Files to be attached
